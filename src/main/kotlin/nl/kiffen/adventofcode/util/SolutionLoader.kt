@@ -6,15 +6,15 @@ import io.quarkus.logging.Log
 
 object SolutionLoader {
 
-    public fun loadInput(year:String,day:String):String {
-        val filePath = String.format("%s/%s/input", year, day);
+    fun loadInput(year:String,day:String):String {
+        val filePath = String.format("%s/%s/input", year, day)
         try {
-            val classLoader = Thread.currentThread().getContextClassLoader();
-            return Files.readString(Paths.get(classLoader.getResource(filePath)?.toURI()));
+            val classLoader = Thread.currentThread().getContextClassLoader()
+            return Files.readString(classLoader.getResource(filePath)?.toURI()?.let { Paths.get(it) })
         } catch (e: Exception) {
             Log.error(e.printStackTrace())
-            Log.error("Error loading input: ${e.message}")
-            return "No input found for ${year}/${day}"
+            Log.error("Error loading input: $e.message")
+            return "No input found for $year/$day"
         }
     }
 }

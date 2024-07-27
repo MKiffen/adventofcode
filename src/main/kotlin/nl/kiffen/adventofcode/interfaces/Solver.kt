@@ -1,5 +1,5 @@
-package nl.kiffen.adventofcode.interfaces;
+package nl.kiffen.adventofcode.interfaces
 
-interface Solver {
+fun interface Solver {
     fun solve(input:String)
 }
